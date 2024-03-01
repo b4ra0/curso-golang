@@ -10,16 +10,26 @@ import (
 	"strings"
 )
 
+type outputtable interface {
+	Salvar() error
+	Display()
+}
+
 func main() {
-	titulo, conteudo := getNotaData()
 	texto := getTodoData()
 	userTodo := todo.New(texto)
-	userTodo.Display()
+	exportarDados(userTodo)
+	fmt.Println("Todo salvo com sucesso")
+	titulo, conteudo := getNotaData()
 	userNota := nota.New(titulo, conteudo)
-	userNota.Display()
-	err := userNota.Salvar()
-	handleError(err)
+	exportarDados(userNota)
 	fmt.Println("Nota salva com sucesso")
+}
+
+func exportarDados(dados outputtable) {
+	dados.Display()
+	err := dados.Salvar()
+	handleError(err)
 }
 
 func getTodoData() string {
