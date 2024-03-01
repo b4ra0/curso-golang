@@ -13,16 +13,22 @@ type User struct {
 	createdAt        time.Time
 }
 
-func (u User) OutputUserDetails() {
+type Admin struct {
+	email    string
+	password string
+	User
+}
+
+func (u User) OutputDetails() {
 	fmt.Println(u.nome, u.sobrenome, u.dataDeNascimento)
 }
 
-func (u *User) ClearUserName() {
+func (u *User) ClearName() {
 	u.nome = ""
 	u.sobrenome = ""
 }
 
-func NewUser(nome, sobrenome, dataDeNascimento string) (*User, error) {
+func New(nome, sobrenome, dataDeNascimento string) (*User, error) {
 	if nome == "" || sobrenome == "" || dataDeNascimento == "" {
 		return nil, errors.New("Nome, sobrenome ou data de nascimento não digitada")
 	}
@@ -32,4 +38,17 @@ func NewUser(nome, sobrenome, dataDeNascimento string) (*User, error) {
 		dataDeNascimento: dataDeNascimento,
 		createdAt:        time.Now(),
 	}, nil
+}
+
+func NewAdmin(email, password string) Admin {
+	return Admin{
+		email:    email,
+		password: password,
+		User: User{
+			nome:             "Admin",
+			sobrenome:        "Admin",
+			dataDeNascimento: "---",
+			createdAt:        time.Now(),
+		},
+	}
 }
