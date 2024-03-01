@@ -4,21 +4,36 @@ import (
 	"bufio"
 	"errors"
 	"example.com/notas/nota"
+	"example.com/notas/todo"
 	"fmt"
 	"os"
 	"strings"
 )
 
 func main() {
+	titulo, conteudo := getNotaData()
+	texto := getTodoData()
+	userTodo := todo.New(texto)
+	userTodo.Display()
+	userNota := nota.New(titulo, conteudo)
+	userNota.Display()
+	err := userNota.Salvar()
+	handleError(err)
+	fmt.Println("Nota salva com sucesso")
+}
+
+func getTodoData() string {
+	texto, err := getUserInput("Texto do todo:")
+	handleError(err)
+	return texto
+}
+
+func getNotaData() (string, string) {
 	titulo, err := getUserInput("Titulo da nota:")
 	handleError(err)
 	conteudo, err := getUserInput("Conteúdo da nota:")
 	handleError(err)
-	userNota := nota.New(titulo, conteudo)
-	userNota.Display()
-	err = userNota.Salvar()
-	handleError(err)
-	fmt.Println("Nota salva com sucesso")
+	return titulo, conteudo
 }
 
 func handleError(err error) {
