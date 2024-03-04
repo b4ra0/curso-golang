@@ -4,15 +4,20 @@ import "fmt"
 
 func main() {
 	precos := []float64{1, 2, 3}
-	fmt.Println(precos[1])
+	//fmt.Println(precos[1])
 	precos[1] = 9.99
 
 	precos = append(precos, 5.99)
 	precos = precos[1:]
-	fmt.Println(precos)
+	//fmt.Println(precos)
 
 	precosComDesconto := []float64{10, 50, 35}
 	precos = append(precos, precosComDesconto...)
+
+	for _, value := range precos {
+		fmt.Println(value)
+	}
+
 }
 
 //func main() {

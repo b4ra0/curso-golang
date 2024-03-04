@@ -15,4 +15,8 @@ func main() {
 
 	delete(websites, "Google")
 	fmt.Println(websites)
+
+	for _, value := range websites {
+		fmt.Println(value)
+	}
 }
