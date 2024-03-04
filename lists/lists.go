@@ -10,6 +10,9 @@ func main() {
 	precos = append(precos, 5.99)
 	precos = precos[1:]
 	fmt.Println(precos)
+
+	precosComDesconto := []float64{10, 50, 35}
+	precos = append(precos, precosComDesconto...)
 }
 
 //func main() {
